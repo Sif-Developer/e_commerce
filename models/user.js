@@ -19,6 +19,7 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
     },
+
     email: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -31,7 +32,38 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
     },
+
     password: DataTypes.STRING,
+
+    address: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: "Please, introduce your address",
+        },
+      },
+    },
+
+    phone: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: "Please, introduce your address",
+        },
+      },
+    },
+
+    image: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: "Please, introduce your address",
+        },
+      },
+    },
   }, {
     sequelize,
     modelName: 'User',

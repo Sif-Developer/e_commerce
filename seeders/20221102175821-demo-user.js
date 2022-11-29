@@ -8,6 +8,9 @@ module.exports = {
         name: 'Mufasa',
         email: 'mufasa@example.com',
         password: '123456',
+        address: 'Street 7',
+        phone: '662587799',
+        image: '',      
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -16,6 +19,9 @@ module.exports = {
         name: 'Simba',
         email: 'simba@example.com',
         password: '147258',
+        address: 'Street 8',
+        phone: '662587449',
+        image: '', 
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -24,6 +30,9 @@ module.exports = {
         name: 'Nala',
         email: 'nala@example.com',
         password: '258369',
+        address: 'Street 12',
+        phone: '662587799',
+        image: '', 
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -32,6 +41,9 @@ module.exports = {
         name: 'Sarabi',
         email: 'sarabi@example.com',
         password: '456789',
+        address: 'Street 4',
+        phone: '662586669',
+        image: '', 
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -40,6 +52,9 @@ module.exports = {
         name: 'Zazu',
         email: 'zazu@example.com',
         password: '147369',
+        address: 'Street 8',
+        phone: '662587799',
+        image: '', 
         createdAt: new Date(),
         updatedAt: new Date()
       }

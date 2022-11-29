@@ -1,7 +1,7 @@
 {
   "name": "e_commerce",
   "version": "1.0.0",
-  "description": "",
+  "description": "The following collaborative project consists of the creation of an online store (e-commerce) in which the knowledge acquired in Node and Express technologies is combined, in addition to MySQl and Sequelize.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -23,7 +23,7 @@
     "express": "^4.18.2",
     "jsonwebtoken": "^8.5.1",
     "mysql2": "^2.3.3",
-    "sequelize": "^6.25.3"
+    "sequelize": "^6.26.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.20"
