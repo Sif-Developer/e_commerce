@@ -1,4 +1,4 @@
-const { User, Order,Product,Token,Sequelize} = require("../models/index");
+const { User, Order, Product, Token, Sequelize } = require("../models/index");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { jwt_secret } = require("../config/config.json")["development"];
@@ -42,15 +42,15 @@ const UserController = {
     });
   },
 
-      async getUsers(req, res) {
-        try {
-            const users = await User.findAll({ include: [Order] });
-            res.send(users);
-          } catch (error) {
-            console.error(err);
-            res.status(500).send(err);
-          }
-        },
+  async getUsers(req, res) {
+    try {
+      const users = await User.findAll({ include: [Order] });
+      res.send(users);
+    } catch (error) {
+      console.error(err);
+      res.status(500).send(err);
+    }
+  },
 
   async logoutUser(req, res) {
     try {
