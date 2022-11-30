@@ -10,6 +10,7 @@ const UserController = {
   async createUser(req, res, next) {
     try {
       req.body.role = "user";
+      console.log(req.body)
       const password = await bcrypt.hash(req.body.password, 10);
       const user = await User.create({ ...req.body, password });
       res.send(user);
@@ -39,7 +40,10 @@ const UserController = {
       const token = jwt.sign({ id: user.id }, jwt_secret);
       Token.create({ token, UserId: user.id });
       res.send({ message: "Wellcome " + user.name, user, token });
-    });
+    }).catch(err=> {
+      console.error(err)
+    res.send(err)
+    })
   },
 
       async getUsers(req, res) {
@@ -70,6 +74,15 @@ const UserController = {
         .send({ message: "Error while connecting" });
     }
   },
+  async getUserLogged(req,res){
+    try {
+     const user =await User.findByPk(req.user.id)
+     res.send(user)
+    } catch (error) {
+      console.error(error)
+      res.send(error)
+    }
+  }
 }
 
 module.exports = UserController

@@ -50,7 +50,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       validate: {
         notNull: {
-          msg: "Please, introduce your address",
+          msg: "Please, introduce your phone",
         },
       },
     },
@@ -60,7 +60,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       validate: {
         notNull: {
-          msg: "Please, introduce your address",
+          msg: "Please, introduce your image",
         },
       },
     },
