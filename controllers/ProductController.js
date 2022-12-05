@@ -34,6 +34,24 @@ const ProductController = {
     });
     res.send("Product has been deleted successfully");
   },
+  getAll(req, res) {
+
+    Product.findAll({
+
+    })
+
+        .then(Products => res.send(Products))
+
+        .catch(err => {
+
+            console.log(err)
+
+            res.status(500).send({ message: 'Error loading categories' })
+
+        })
+
+},
+
   async getProductById(req, res) {
     Product.findByPk(req.params.id).then((post) => res.send(post));
   },

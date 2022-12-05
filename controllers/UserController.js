@@ -74,6 +74,7 @@ const UserController = {
         .send({ message: "Error while connecting" });
     }
   },
+  
   async getUserLogged(req,res){
     try {
      const user =await User.findByPk(req.user.id)
