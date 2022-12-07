@@ -2,6 +2,8 @@ const express = require('express');
 const { getProductByName } = require('../controllers/ProductController');
 const router = express.Router();
 const ProductController = require('../controllers/ProductController')
+// const ImageController = require('../controllers/ImageController')
+// const imageUploader = require('../helpers/image-uploader')
 
 
 // $ sequelize model:generate --name Products --attributes name:string,price:integer,description:string, Cat

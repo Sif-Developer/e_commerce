@@ -1,4 +1,4 @@
-const { User, Order,Product,Token,Sequelize} = require("../models/index");
+const { User, Order, Product, Token, Sequelize } = require("../models/index");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { jwt_secret } = require("../config/config.json")["development"];
@@ -8,6 +8,8 @@ const { Op } = Sequelize;
 
 const UserController = {
   async createUser(req, res, next) {
+    console.log('hola')
+    if (req.file) req.body.image = req.file.filename
     try {
       req.body.role = "user";
       console.log(req.body)
@@ -18,6 +20,7 @@ const UserController = {
       console.error(error)
       next(error)
     }
+
   },
 
   loginUser(req, res) {
@@ -40,21 +43,21 @@ const UserController = {
       const token = jwt.sign({ id: user.id }, jwt_secret);
       Token.create({ token, UserId: user.id });
       res.send({ message: "Wellcome " + user.name, user, token });
-    }).catch(err=> {
+    }).catch(err => {
       console.error(err)
-    res.send(err)
+      res.send(err)
     })
   },
 
-      async getUsers(req, res) {
-        try {
-            const users = await User.findAll({ include: [Order] });
-            res.send(users);
-          } catch (error) {
-            console.error(err);
-            res.status(500).send(err);
-          }
-        },
+  async getUsers(req, res) {
+    try {
+      const users = await User.findAll({ include: [Order] });
+      res.send(users);
+    } catch (error) {
+      console.error(err);
+      res.status(500).send(err);
+    }
+  },
 
   async logoutUser(req, res) {
     try {
@@ -74,11 +77,11 @@ const UserController = {
         .send({ message: "Error while connecting" });
     }
   },
-  
-  async getUserLogged(req,res){
+
+  async getUserLogged(req, res) {
     try {
-     const user =await User.findByPk(req.user.id)
-     res.send(user)
+      const user = await User.findByPk(req.user.id)
+      res.send(user)
     } catch (error) {
       console.error(error)
       res.send(error)
