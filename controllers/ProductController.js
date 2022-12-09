@@ -3,7 +3,7 @@ const product = require("../models/product");
 const { Op } = Sequelize;
 
 const ProductController = {
-  createProduct(req, res,next) {
+  createProduct(req, res, next) {
     Product.create(req.body)
       .then((product) =>
         res
@@ -11,8 +11,8 @@ const ProductController = {
           .send({ message: "Product created successfully", product })
       )
       .catch((err) => {
-        console.error(err)
-        next(err)
+        console.error(err);
+        next(err);
       });
   },
   async updateProductById(req, res) {
@@ -34,23 +34,14 @@ const ProductController = {
     });
     res.send("Product has been deleted successfully");
   },
-  getAll(req, res) {
-
-    Product.findAll({
-
-    })
-
-        .then(Products => res.send(Products))
-
-        .catch(err => {
-
-            console.log(err)
-
-            res.status(500).send({ message: 'Error loading categories' })
-
-        })
-
-},
+  async getAllProducts(req, res) {
+    try {
+      const products = await Product.findAll();
+      res.send({ msg: "Your products", products });
+    } catch (error) {
+      res.status(500).send({ msg: "Error while getting products", error });
+    }
+  },
 
   async getProductById(req, res) {
     Product.findByPk(req.params.id).then((post) => res.send(post));
