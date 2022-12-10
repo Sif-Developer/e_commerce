@@ -1,4 +1,4 @@
-const { User, Order, Product, Token, Sequelize } = require("../models/index");
+const { User, Order, Token, Sequelize } = require("../models/index");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { jwt_secret } = require("../config/config.json")["development"];
@@ -7,12 +7,11 @@ const { Op } = Sequelize;
 
 
 const UserController = {
+
   async createUser(req, res, next) {
-    console.log('hola')
     if (req.file) req.body.image = req.file.filename
     try {
       req.body.role = "user";
-      console.log(req.body)
       const password = await bcrypt.hash(req.body.password, 10);
       const user = await User.create({ ...req.body, password });
       res.send(user);
@@ -20,7 +19,6 @@ const UserController = {
       console.error(error)
       next(error)
     }
-
   },
 
   loginUser(req, res) {

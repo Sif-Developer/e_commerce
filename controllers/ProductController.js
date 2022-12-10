@@ -1,20 +1,19 @@
 const { Product, Category, Sequelize } = require("../models/index");
-const product = require("../models/product");
 const { Op } = Sequelize;
 
 const ProductController = {
-  createProduct(req, res,next) {
-    Product.create(req.body)
-      .then((product) =>
-        res
-          .status(201)
-          .send({ message: "Product created successfully", product })
-      )
-      .catch((err) => {
-        console.error(err)
-        next(err)
-      });
+
+  async createProduct(req, res, next) {
+    if (req.file) req.body.image = req.file.filename
+    try {
+      const product = await Product.create({ ...req.body });
+      res.send(product);
+    } catch (error) {
+      console.error(error)
+      next(error)
+    }
   },
+
   async updateProductById(req, res) {
     await Product.update(
       { ...req.body },
@@ -26,6 +25,7 @@ const ProductController = {
     );
     res.send("Product updated successfully");
   },
+  
   async deleteProductById(req, res) {
     await Product.destroy({
       where: {
