@@ -3,7 +3,7 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  
+
   class Product extends Model {
     /**
      * Helper method for defining associations.
@@ -48,6 +48,10 @@ module.exports = (sequelize, DataTypes) => {
     },
     image:{
       type: DataTypes.STRING,
+      allowNull: true,
+    },
+    CategoryId:{
+      type: DataTypes.INTEGER,
       allowNull: true,
     },
   }, {
