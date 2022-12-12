@@ -1,4 +1,4 @@
-const { User, Order, Token, Sequelize } = require("../models/index");
+const { User, Order, Token, Sequelize, Product } = require("../models/index");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { jwt_secret } = require("../config/config.json")["development"];
@@ -40,7 +40,7 @@ const UserController = {
       }
       const token = jwt.sign({ id: user.id }, jwt_secret);
       Token.create({ token, UserId: user.id });
-      res.send({ message: "Wellcome " + user.name, user, token });
+      res.send({ message: "Welcome " + user.name, user, token });
     }).catch(err => {
       console.error(err)
       res.send(err)
@@ -78,11 +78,14 @@ const UserController = {
 
   async getUserLogged(req, res) {
     try {
-      const user = await User.findByPk(req.user.id)
+      const user = await User.findByPk(req.user.id,{ include: [
+        {model: Order, include: [Product] }
+      ] } )
       res.send(user)
     } catch (error) {
       console.error(error)
       res.send(error)
+      
     }
   }
 }
