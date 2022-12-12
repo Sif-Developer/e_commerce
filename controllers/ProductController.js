@@ -25,7 +25,7 @@ const ProductController = {
     );
     res.send("Product updated successfully");
   },
-  
+
   async deleteProductById(req, res) {
     await Product.destroy({
       where: {
@@ -34,23 +34,25 @@ const ProductController = {
     });
     res.send("Product has been deleted successfully");
   },
-  getAll(req, res) {
+  async getAll(req, res) {
 
-    Product.findAll({
-
-    })
-
-        .then(Products => res.send(Products))
-
-        .catch(err => {
-
-            console.log(err)
-
-            res.status(500).send({ message: 'Error loading categories' })
-
-        })
-
-},
+    try {
+      const products = await Product.findAll({
+        attributes: {
+          exclude: ["categoryId", "CategoryId" ,"createdAt", "updatedAt"],
+        },
+        include: [
+          { model: Category, attributes: ["name"] },
+        ],
+      });
+      res.status(200).send(products);
+    } catch (error) {
+      console.error(error);
+      res
+        .status(500)
+        .send({ msg: "There was an error getting the products", error });
+    }
+  },
 
   async getProductById(req, res) {
     Product.findByPk(req.params.id).then((post) => res.send(post));
