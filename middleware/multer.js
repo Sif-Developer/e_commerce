@@ -16,4 +16,7 @@ const generateUploadImageMulter=path=>Multer({
 ;
 const uploadUserImages = generateUploadImageMulter('./images/users')
 
-module.exports = {uploadUserImages}
+const ProductImages = generateUploadImageMulter('./images/products')
+
+module.exports = {uploadUserImages, ProductImages}
+

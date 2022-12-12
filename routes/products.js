@@ -1,14 +1,10 @@
 const express = require('express');
 const { getProductByName } = require('../controllers/ProductController');
 const router = express.Router();
+const { ProductImages } = require("../middleware/multer");
 const ProductController = require('../controllers/ProductController')
-// const ImageController = require('../controllers/ImageController')
-// const imageUploader = require('../helpers/image-uploader')
 
-
-// $ sequelize model:generate --name Products --attributes name:string,price:integer,description:string, Cat
-// egoryId:integer
-router.post('/createProduct',ProductController.createProduct)
+router.post('/createProduct',  ProductImages.single('image'), ProductController.createProduct)
 router.put('/updateProductById/:id', ProductController.updateProductById)
 router.delete('/deleteProductById/:id', ProductController.deleteProductById)
 router.get('/getProductById/:id', ProductController.getProductById)
