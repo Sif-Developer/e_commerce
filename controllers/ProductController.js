@@ -34,13 +34,16 @@ const ProductController = {
     });
     res.send("Product has been deleted successfully");
   },
-  async getAllProducts(req, res) {
-    try {
-      const products = await Product.findAll();
-      res.send({ msg: "Your products", products });
-    } catch (error) {
-      res.status(500).send({ msg: "Error while getting products", error });
-    }
+  getAllProducts(req, res) {
+    Product.findAll({})
+
+      .then((Products) => res.send(Products))
+
+      .catch((err) => {
+        console.log(err);
+
+        res.status(500).send({ message: "Error loading categories" });
+      });
   },
 
   async getProductById(req, res) {
